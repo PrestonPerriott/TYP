@@ -21,6 +21,12 @@ var DocumentSchema = mongoose.Schema({
         required: true
     }, 
 
+    public: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+
     comments: [
         {
          author: { 
@@ -44,6 +50,11 @@ DocumentSchema.methods.comment = function (comment) {
 
 DocumentSchema.methods.changeName = function (newName) {
     this.filename = newName
+    return this.save()
+}
+
+DocumentSchema.methods.updatePublicity = function (val) {
+    this.public = val
     return this.save()
 }
 
