@@ -1,5 +1,11 @@
 'use strict'
 
+import App from './App'
+import './assests/fonts'
+import './assests/css/bootstrap.css'
+import './assests/js/main'
+import './App.css'
+
 import React from 'react'
 import ReactDOm from 'react-dom'
 import {Provider} from 'react-redux'
@@ -16,6 +22,11 @@ import registerServiceWorker from './registerServiceWorker'
 
 ReactDOM.render((
     <Provider store={store}>
+        <ConnectedRouter history={history}>
+            <Switch>
+                <Route path='/' component={App} />
+            </Switch>
+        </ConnectedRouter>
         <App />
     </Provider>
 ), document.getElementById('root'))
