@@ -10,6 +10,7 @@ const dotenv = require('dotenv')
 const cors = require('cors')
 const helmet = require('helmet')
 const Grid = require('gridfs-stream');
+const path = require('path')
 const cloudinary = require('cloudinary') /// For handling images and videos
 
 var app = express()
@@ -66,6 +67,11 @@ app.use(passport.session())
 app.use(cors())
 app.use(helmet())
 
+app.use(express.static(path.resolve(__dirname, '..', 'public')))
+app.use(express.static(path.resolve(__dirname, '..', 'node_modules')))
+app.get('*', function (req, res) {
+    res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'))
+})
 app.use(require('./Routes'))
 
 /// Truthy vs Falsey values
